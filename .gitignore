@@ -1,0 +1,11 @@
+._*
+.DS_Store
+Thumbs.db
+vendor
+composer.*
+__pycache__
+.vs*
+node_modules
+test_local
+config.php
+upload/
