@@ -4,3 +4,10 @@
 
 ## 依赖
 - `composer require aliyuncs/oss-sdk-php`
+
+# 接口
+
+## 上传文件
+- `/upload.php`
+    - (FILE) `file[]` 上传文件（建议一个个上传）
+    - (POST) `album` 相册名称（将作为文件夹名称）

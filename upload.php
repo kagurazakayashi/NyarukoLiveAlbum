@@ -103,6 +103,12 @@ function getresize($imageWidth,$imageHeight,$maxWidth,$maxHeight) {
     }
 }
 
+function mkdirs($dir, $mode=0777) {
+    if (is_dir($dir) || @mkdir($dir, $mode)) return TRUE;
+    if (!mkdirs(dirname($dir), $mode)) return FALSE;
+    return @mkdir($dir, $mode);
+}
+
 if (!isset($_FILES["file"]) || count($_FILES["file"]) <= 0 ||
     !isset($_POST["album"]) || strlen($_POST["album"]) <= 0 ||
     strpos($_POST["album"],'\\') || strpos($_POST["album"],'/')
@@ -129,19 +135,40 @@ for ($upfileId = 0; $upfileId < count($files["name"]); $upfileId++) {
         $jsonarr[$upfileName] = [$upfileErr,"错误"];
     } else {
         $covered = false;
+        $savedfile = [];
         foreach ($img_imageresize as $sizename => $sizemode) {
             $saveext = strval(time()).'.'.strval($upfileId).'.'.$sizename;
-            $saveto = $dos_saveToOSS ? ($tmpdir.$dos_filename) : ($dos_albumdir.$dos_filename);
+            $saveto = $dos_saveToOSS ? $tmpdir.'/' : ($dos_albumdir.$_POST["album"].'/');
+            if (!is_dir($saveto) && !mkdirs($saveto,$dos_chmod)) {
+                $jsonarr[$upfileName] = [-2,"文件夹创建失败"];
+                break;
+            }
+            $saveto .= $dos_filename;
             $resizereq = resizeto($upfileTemp,$saveto,$saveext,$extension,$sizemode,$img_strip);
             if ($resizereq[1]) $covered = true;
+            $savedfile = array_merge($savedfile,$resizereq[0]);
         }
         if ($covered) {
             $jsonarr[$upfileName] = [1,"文件已存在"];
         } else {
             if ($dos_saveToOSS) {
-                //TODO: 上传OSS
+                foreach ($savedfile as $uploadfile) {
+                    $uploadfilearr = explode("/", $uploadfile);
+                    $uledname = array_pop($uploadfilearr);
+                    $uledpath = implode("/", $uploadfilearr);
+                    $object = $_POST["album"].'/'.$uledname; // test1/nla.1573292335.1.R.jpg
+                    $filePath = $uploadfile; // /private/var/tmp/nla.1573292335.1.R.jpg
+                    try{
+                        $ossClient = new OssClient($oss_accessKeyId, $oss_accessKeySecret, $oss_endpoint);
+                        $ossClient->uploadFile($oss_bucket, $object, $filePath);
+                    } catch(OssException $e) {
+                        $jsonarr[$upfileName] = [-4,"图片服务器失败",$e->getMessage()];
+                        return;
+                    }
+                    if (unlink($uploadfile)) $jsonarr[$upfileName] = [-3,"删除临时文件失败"];
+                }
             }
-            $jsonarr[$upfileName] = [0,"完成"];
+            if (!isset($jsonarr[$upfileName])) $jsonarr[$upfileName] = [0,"完成"];
         }
     }
 }

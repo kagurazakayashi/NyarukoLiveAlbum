@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "af9f9295-fdcd-4a28-8aff-6098f1facd53",
+		"name": "NyarukoLiveAlbum",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "upload.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file[0]",
+							"description": "提交照片1",
+							"type": "file",
+							"src": "/Users/yashi/Pictures/头像/IMG_20190221_153511.jpg"
+						},
+						{
+							"key": "file[1]",
+							"description": "提交照片2",
+							"type": "file",
+							"src": "/Users/yashi/Pictures/头像/IMG_20190221_153507.jpg"
+						},
+						{
+							"key": "album",
+							"value": "test1",
+							"description": "相册名称",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev.uuu.moe/NyarukoLiveAlbum/upload.php",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"uuu",
+						"moe"
+					],
+					"path": [
+						"NyarukoLiveAlbum",
+						"upload.php"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
