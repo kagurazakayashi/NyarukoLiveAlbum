@@ -3,7 +3,6 @@ require_once __DIR__ . '/vendor/autoload.php'; //不用OSS删除此项
 use OSS\OssClient; //不用OSS删除此项
 use OSS\Core\OssException; //不用OSS删除此项
 require_once 'config.php';
-//POST album 相册
 
 /**
  * [NyarukoLogin] uploadfile.class.php

@@ -6,6 +6,8 @@ $dos_albumdir = dirname(__FILE__)."/upload/";
 $dos_filename = "nla"; // 文件名称前缀
 $dos_chmod = 770; //新建文件夹权限
 
+$url_albumdir = "upload/"; //上传根目录网址,OSS用OSS网址
+
 // 阿里云 OSS 设置
 // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
 $oss_accessKeyId = "<yourAccessKeyId>"; // yourAccessKeyId
