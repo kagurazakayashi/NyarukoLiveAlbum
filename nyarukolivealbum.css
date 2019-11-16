@@ -1,0 +1,54 @@
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.mdui-list {
+    padding-top: 0;
+}
+#indeximgcard {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+#introduction {
+    display: inline-block;
+    height: auto;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space:normal;
+}
+#timelinebg {
+    display: inline-block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-left: 4px solid gray;
+    border-radius: 2px;
+}
+#timelinedot {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    left: -12px;
+    top: 4px;
+    border-radius: 10px;
+    background-color: grey;
+}
+#timelinetime {
+    color: grey;
+}
+.photo {
+    display: inline-block;
+    max-width: 300px;
+    max-height: 300px;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* 如果浏览器窗口小于 */
+@media only screen and (max-width: 400px) {
+    .photo {
+        max-width: 100%;
+        max-width: calc(100% - 30px);
+    }
+}

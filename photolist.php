@@ -67,6 +67,7 @@ for ($fli=0; $fli < count($filelist); $fli++) {
     $nowfile = str_replace('\\','/',$filelist[$fli]);
     $nowfilearr = explode('/',$nowfile);
     $nowfilename = array_pop($nowfilearr);
+    if (explode('.',$nowfilename)[0] != "nla") continue;
     $dir = implode('/',$nowfilearr);
     $filenamearr = explode('.',$nowfilename);
     $prefilename = $filenamearr[0].'.'.$filenamearr[1].'.'.$filenamearr[2];
@@ -130,7 +131,7 @@ for ($i=$newfilelistcount-1; $i >= 0; $i--) {
     }
 }
 $reqarr = [
-    [count($filelist),md5($filelistkeysstr),$url_autoreload],
+    [count($filelist),md5($filelistkeysstr),$url_autoreload,$url_albumdir],
     $newfilelist
 ];
 header('Content-Type:application/json;charset=utf-8');

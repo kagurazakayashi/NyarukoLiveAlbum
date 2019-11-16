@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "upload.php",
+			"name": "upload.php（照片上载）",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -44,6 +44,41 @@
 					"path": [
 						"NyarukoLiveAlbum",
 						"upload.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "photolist.php（照片列表）",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://dev.uuu.moe/NyarukoLiveAlbum/photolist.php?album=test1",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"uuu",
+						"moe"
+					],
+					"path": [
+						"NyarukoLiveAlbum",
+						"photolist.php"
+					],
+					"query": [
+						{
+							"key": "album",
+							"value": "test1",
+							"description": "相册名称"
+						}
 					]
 				}
 			},

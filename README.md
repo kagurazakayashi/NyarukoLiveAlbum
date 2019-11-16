@@ -4,7 +4,9 @@
 
 ## 依赖
 - 若使用阿里云 OSS：
-  - `composer require aliyuncs/oss-sdk-php` ( 的话)
+  - `composer require aliyuncs/oss-sdk-php`
+- 若使用前端网页：
+  - `npm install mdui --save`
 
 # 接口
 
@@ -41,7 +43,8 @@
     [
         2, //照片数量
         "f6f47b8578c475915696c6c270ef8a22", //出现变化此MD5会变动
-        60 //自动刷新时间秒
+        60, //自动刷新时间秒
+        "upload/" //上传根目录
     ],
     {
         "11.09": { //月.日
